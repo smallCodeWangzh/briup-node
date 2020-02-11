@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/show">展示</router-link>
+        <router-view></router-view>
+    </div>
+    <template id = "show">
+            <div>
+                <router-link to="/show/login">登陆</router-link>
+                <router-link to="/show/register">注册</router-link>
+                <router-view ></router-view>
+            </div>
+    </template>
+    <script>
+        let show = {
+            template : "#show"
+        }
+        let login = {
+            template : "<h1>登陆组件</h1>"
+        }
+        let register = {
+            template : "<h1>注册组件</h1>"
+        }
+        const router = new VueRouter({
+            routes : [
+                {path : "/show",component : show,children : [
+                    {path : "login",component : login}, // 这里一定不能带 /
+                    {path : "register",component : register}
+                ]}
+            ],
+
+             
+        });
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>

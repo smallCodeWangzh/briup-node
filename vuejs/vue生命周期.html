@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ msg }}</h1>
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm  = new Vue({
+            el : "#app",
+            data : {
+                msg : "这是一个春天"
+            },
+            methods: {
+              add () {
+                  alert("dd");
+              }  
+            },
+            /*
+                钩子函数是指事件发生时会调用特定函数的
+            */
+            beforeCreate () {  
+                /*
+                    实例创建完成后会调用这个钩子函数，但是需要注意的是此时
+                    method,data 还没有初始化                   
+                */
+            },
+            created () {
+                /*
+                    此时data , method已经初始化好了，因次要想调用data,method
+                    最早就在create方法中调用
+                */
+                //console.info(this.msg);
+                //this.add();
+            },
+            beforeMount () {
+                /*
+                    此时vue已经开始编辑模板，执行vue中的指令，最终在在内存中生成一个dom模板，
+                    注意调用该方法时，dom模板还是在内存中，没有渲染(挂载)到页面上
+                */
+            },
+            mounted () {
+                /*
+                    该模板已经挂载到页面上了
+                */
+            },
+            beforeUpdate () {
+                // 当数据改变时就会调用该方法，但是注意，这个改变的数据还没有渲染到页面上
+            },
+            updated () {
+                // 修改的数据已经渲染到页面上去了
+            }
+
+
+
+        })
+    </script>
+</body>
+</html>

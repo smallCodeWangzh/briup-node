@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!--
+        过滤器
+        调用过滤器 {{ msg | 过滤器名称}}
+    -->
+    <button type="button" class="btn btn-lg btn-default">button</button>
+    
+    <div id="app">
+        <h1>{{msg | textFilter("123")}}</h1>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        // 第一个参数用来接收要被过滤的信息
+        Vue.filter("textFilter",(data,param) => {
+            return data.replace(/单纯/g,"邪恶" + param);
+        });
+        const vm  = new Vue({
+            el : "#app",
+            data : {
+                msg : "我曾经很单纯，很单纯，非常单纯"
+            }
+        });
+    </script>
+</body>
+</html>

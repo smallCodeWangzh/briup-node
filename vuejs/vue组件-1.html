@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <com-json></com-json>
+        </div>
+    </div>
+
+    <script>
+        // 1.创建组件
+        // const a = Vue.extend({
+        //     template : "<h1>这是个美丽的世界</h1>"
+        // });
+        // Vue.component("com",a);
+        // new Vue({
+        //     el : "#app"
+        // });
+        // 简化
+        Vue.component("comJson",Vue.extend({
+            template : "<h1>你好</h2>"
+        }));
+        new Vue({
+             el : "#app"
+         });
+    </script>
+</body>
+</html>

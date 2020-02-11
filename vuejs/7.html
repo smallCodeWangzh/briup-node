@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+</head>
+<body>
+    <div id="app">
+        <h1>{{ message }}</h1>
+        <div v-text = "code"></div>
+        <div v-html = "code"></div>
+        <!--
+            v-bind:用来绑定属性,可以简写为 :   
+        
+        -->
+        <input type="button" v-bind:title="title" v-bind:value = "title">
+        <input type="button" :title = "title" value = "好好学习">
+        
+        <!--
+            v-on: 用来绑定事件，可以简写为 @
+
+        -->
+        <button v-on:click="show">按钮</button>
+        
+        <button @click="show">再次好好学习</button>
+
+
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el : "#app",
+            data : {
+                message : "你好",
+                code : "<h1>这个世界</h1>",
+                title : "这是一个按钮"
+            },
+            methods : {
+                show : function() {
+                    alert("你好");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+</head>
+<body>
+    <div id="app">
+        <button @click="start">开始</button> 
+            &nbsp;&nbsp; 
+        <button @click="end">结束</button>
+        <h4>{{ message }}</h4>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm  = new Vue({
+            el : "#app",
+            data : {
+                message : "人的一生就是要不断的接受自己是一个平凡的人!",
+                intervalId : null
+            },
+            methods : {
+                start() {
+                    
+                    if(this.intervalId != null) return;
+
+                    // 定时器
+                    this.intervalId =  setInterval(() => {
+                                /*
+                                    跑马灯其实就是把第一个字母放到最后面
+                                */
+                                let start = this.message.substring(0,1);
+
+                                let end = this.message.substring(1);
+                                this.message = end + start;
+                        },400);
+                    },
+
+                end () {
+                    // 清除跑马灯
+                    clearInterval(this.intervalId);
+                    this.intervalId = null;
+                }
+            }
+        });
+    
+    </script>
+</body>
+
+</html>

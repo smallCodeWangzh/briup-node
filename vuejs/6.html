@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<div id="app">
+		<input type="text" v-model = "num1">
+		<button>+</button>
+		<input type="text" v-model = "num2">
+		<button v-on:click="add">=</button>
+		<input type="text" disabled="disabled" v-model = "num3" >
+	</div>
+	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript">
+		const app = new Vue({
+			el : "#app",
+			data : {
+				num1 : "",
+				num2 : "",
+				num3 : ""
+
+			},
+			methods : {
+				add() {
+					this.num3 = parseInt(this.num1) + parseInt(this.num2);
+				}
+			}
+		});
+	</script>
+</body>
+</html>

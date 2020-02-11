@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <com></com>
+    </div>
+    <template id="ll">
+        <div>
+            <!--只有一个根标签-->
+            <h1>今天在家上班 </h1>
+            {{msg}}
+        </div>
+        
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            components: {
+               com : {
+                template : "#ll",
+                data () {
+                    return {msg : "111==11"}
+                }
+               }
+            }
+        });
+    </script>
+</body>
+
+</html>

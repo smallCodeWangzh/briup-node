@@ -1,0 +1,31 @@
+<!--
+	双向绑定数据
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>双向绑定数据</title>
+</head>
+<body>
+	<!--
+		mvvm思想
+	-->
+	<div id="app">
+		姓名：<input type="text" v-model="fistName">
+		名字：<input type="text" v-model="lastName">
+		<h1><span>{{fistName + lastName }}</span></h1>
+	</div>
+
+	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript">
+		new Vue({
+			el : "#app",
+			data : {
+				fistName : "",
+				lastName : ""
+			}
+		});
+	</script>
+</body>
+</html>

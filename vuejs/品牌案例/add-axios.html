@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css" >
+</head>
+<body>
+    <div id="app">      
+        <div class="input-group-addon"> id: <input type="text" v-model="id">
+            name: <input type="text" v-model="name">
+            age: <input type="text" v-model="age" @key.enter="add">
+            <button type="button" class="btn btn-success" @click="add">添加</button>
+            <input type="text" v-model="keyword">
+        </div>
+        <div >    
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in serche(keyword)" :key="user.id">
+                        <td>{{ user.id}}</td>
+                        <td>{{ user.name}}</td>
+                        <td>{{ user.date | timeFilter}}</td>
+                        <td><a href="#" @click.prevent="remove(user.id)">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script src="../node_modules/axios/dist/axios.js"></script>
+    
+    <script>
+        Vue.filter("timeFilter",msg => {
+            let date = new Date(msg);
+            let year = date.getFullYear();
+            let month = (date.getMonth() + 1).toString().padStart(2,0); // 不足两位用 0补齐
+            let day = date.getDay().toString().padStart(2,0);
+            return `${year}-${month}-${day}`;
+
+        });
+
+        axios.defaults.baseURL="http://127.0.0.1:9999/"
+        const vue = new Vue({
+            el : "#app",
+            data : {
+                list : [],
+                id : "",
+                age : "",
+                name : "",
+                keyword : ""
+            },
+            methods : {
+                add() {
+                    let param = new URLSearchParams();
+                    param.append("name",this.name);
+                    axios.post("add",param)
+                    .then(res => {
+                        this.getAllList();
+                    })
+                    .catch(err => {
+                        alert("添加失败")
+                    });
+                },
+                remove(id) {    
+                    axios.get("del/" + id)
+                    .then(res => {
+                        if(res.data.status == 200) {
+                            this.getAllList();
+                        }
+                    });
+                },
+                getAllList() {
+                    axios.get("getAll")
+                    .then(res => {
+                        if(res.data.status == 200) {
+                            this.list = res.data.data;
+                        }
+                    });
+                },
+                serche(keyword) {
+                    let newList = [];
+                    this.list.forEach(item => {
+                        if(item.name.includes(keyword)) {
+                            newList.push(item);
+                        }
+                    });
+                    return newList;
+                }
+            },
+            created () {
+                this.getAllList();
+            }
+        }); 
+    </script>
+</body>
+</html>

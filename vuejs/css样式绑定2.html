@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- <span :style = "{'background-color' : 'pink'}">你这样一个人</span> -->
+        <span :style = "[styleObj,styleObj2]">哎，你这样一个人</span>
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const vm = new Vue({
+            el : "#app",
+            data : {
+                styleObj : {
+                    "background-color" : "red"
+                },
+                styleObj2 : {
+                    "font-size" : "150px"
+                }
+            }
+        });
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+    <style>
+        .inner {
+            background-color: beige;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!--
+            默认情况下会有事件冒泡行为，所以vue提供了事件修饰符
+            .stop 阻止事件冒泡 div事件将不再打印
+        -->
+        <!--
+
+            <div class="inner" @click="inner">
+                <button @click.stop="clcl">按钮</button> 
+            </div>
+            
+        -->
+
+        <!--
+            .prevent 阻止事件默认行为
+            <div>
+    
+                <a href="https://www.baidu.com" @click.prevent="turn">有问题,去百度</a>
+            </div>
+        -->
+
+        <!--    
+            .captrue 事件捕获机制，说白了就是从外到里
+            <div class="inner" @click="inner">
+                <button @click.captrue="clcl">按钮</button> 
+            </div>
+        -->
+
+        <!--
+
+            .self 只有当点击到自己时才出发事件
+            <div class="inner" @click.self="inner">
+                <button @click="clcl">按钮</button> 
+            </div>
+        -->
+
+        <div class="inner" @click="inner">
+            <button @click.stop.once="clcl">按钮</button> 
+        </div>
+        
+    </div>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script>
+        const app = new Vue({
+            el : "#app",
+            methods : {
+                inner() {
+                    console.info("这个 inner 区域");
+                },
+                clcl() {
+                    console.info("这个 按钮 操作");
+                },
+                turn() {
+                    console.info("这是超链接");
+                }
+            }
+        });
+    </script>
+</body>
+</html>

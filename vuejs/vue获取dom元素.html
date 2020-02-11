@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <button @click="add">clickk</button>
+        <h1 ref="dd">这是个耗时</h1>
+
+    </div>
+
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                add() {
+                    console.info(this.$refs.dd);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

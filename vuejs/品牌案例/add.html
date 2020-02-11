@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./lib/bootstrap-3.3.7.css" >
+</head>
+<body>
+    <div id="app">      
+        <div class="input-group-addon"> id: <input type="text" v-model="id">
+            name: <input type="text" v-model="name">
+            age: <input type="text" v-model="age" @key.enter="add">
+            <button type="button" class="btn btn-success" @click="add">添加</button>
+            <input type="text" v-model="keyword">
+        </div>
+        <div >    
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>姓名</th>
+                        <th>时间</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="user in serche(keyword)" :key="user.id">
+                        <td>{{ user.id}}</td>
+                        <td>{{ user.name}}</td>
+                        <td>{{ user.date | timeFilter}}</td>
+                        <td><a href="#" @click="remove(user.id)">删除</a></td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+    <script src="../node_modules/vue/dist/vue.js"></script>
+    <script>
+        Vue.filter("timeFilter",msg => {
+            let date = new Date(msg);
+            let year = date.getFullYear();
+            let month = (date.getMonth() + 1).toString().padStart(2,0); // 不足两位用 0补齐
+            let day = date.getDay().toString().padStart(2,0);
+            return `${year}-${month}-${day}`;
+
+        });
+
+        Vue.config.keyword.f2 = 113;
+        
+        const vue = new Vue({
+            el : "#app",
+            data : {
+                list : [
+                    {id : 1,name : "梁伟",date : new Date()},
+                    {id : 2,name : "路程",date : new Date()},
+                    {id : 3,name : "结束",date : new Date()}
+                ],
+                id : "",
+                age : "",
+                name : "",
+                keyword : ""
+            },
+            methods : {
+                add() {
+                    let obj = {id : this.id,name : this.name,age : new Date()}
+                    this.list.push(obj);
+                    this.id = this.name = "";
+                },
+                remove(id) {    
+                    //this.list.splice(this.list.findIndex((item) => { return item.id == id}),1);
+                    this.list.splice(this.list.findIndex(item => item.id == id),1);
+                },
+                serche(keyword) {
+                    let newList = [];
+                    this.list.forEach(item => {
+                        if(item.name.includes(keyword)) {
+                            newList.push(item);
+                        }
+                    });
+                    return newList;
+                }
+            },
+            filters : {} // 局部过滤器
+
+        }); 
+    </script>
+</body>
+</html>

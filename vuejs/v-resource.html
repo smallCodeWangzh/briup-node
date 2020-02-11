@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-resource/dist/vue-resource.js"></script>
+    <link ref="stylesheet" href="./品牌案例/lib/bootstrap-3.3.7.css">
+</head>
+<body>
+    <div id="app">
+        
+        <button type="button" class="btn btn-lg btn-success" @click="get">button</button>
+        
+        <!--
+
+        -->
+        <button type="button" class="btn btn-success" @click="post">post请求</button>
+        
+    </div>
+    <script>
+        new Vue({
+            el : "#app",
+            data : {},
+            methods: {
+                get() {
+                    this.$http.get("http://120.78.171.248:8801/attendace/getAttendanceResult").then(result => console.info(result.body));
+                },
+                post() {
+                    this.$http.post("http://120.78.171.248:8801/authentication/form1",{},{emulateJSON : true})
+                              .then(result => console.info(result.body));
+                }
+
+            }
+            
+        })    
+    </script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <style>
+        .head {
+            background-color: bisque;
+            height: 50px;
+        }
+        .container {
+            display: flex;
+        }
+        .left {
+            background-color: lightgreen;
+            flex: 2;
+        }
+        .main {
+            background-color: lightpink;
+            flex: 8;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-view name="head"></router-view>
+        <div class="container">
+            <router-view name="left"></router-view>
+            <router-view name="main"></router-view>
+        </div>
+    </div>
+
+    <script>
+        let head = {
+            template : "<div class='head'>我是头部</div>"
+        }
+        let left = {
+            template : "<div class='left'>我是左边</div>"
+        }
+        let main = {
+            template : "<div class='main'>我是主体</div>"
+        }
+        const router = new VueRouter({
+            routes : [
+                {path : "/",components: {
+                    "head" : head,
+                    "main" : main,
+                    "left" : left
+                }}
+            ]
+        });
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+    <script src="./node_modules/vue-router/dist/vue-router.js"></script>
+    <style>
+        .v-enter,
+        .v-leave-to {
+            opacity: 0;
+            transform: translateX(140px);
+        }
+        .v-enter-active,
+        .v-leave-active {
+            transition: all 0.5s ease;
+        }
+        .myactive {
+            background-color: #fdd;
+            font-size: 18px;
+            color: red;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <router-link to="/login" tag="span">登陆</router-link>
+        <router-link to="/register">注册</router-link>
+        <!--设置动画-->
+        <transition mode="out-in">
+            <router-view></router-view>
+        </transition>
+    </div>
+
+    <script>
+        // 创建组件
+        const login = {
+            template : "<h1>登陆组件</h1>"
+        }
+         const register = {
+            template : "<h1>注册组件</h1>"
+         }
+         // 创建路由对象
+         const router = new VueRouter({
+             routes : [
+                 // 设置路由匹配规则
+                 {path : "/",redirect : "/login"}, // 重定向
+                 {path : "/login",component : login},
+                 {path : "/register",component : register},
+             ],
+             linkActiveClass : "myactive"
+         });
+        const vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {},
+            router : router
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <nice :parentmsg = "msg"></nice>
+    </div>
+    <template id="test">
+        <h1>今天的天气很好 ----> {{ parentmsg }}</h1>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            data: {
+                msg : "正在写代码的人是个天才呀"
+            },
+            methods: {},
+            components: {
+                nice : {
+                    template : "#test",
+                    // 注意： 不要去修改父组件里面的数据，虽然可以修改，但是vue会报警告
+                    props: ["parentmsg"]
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

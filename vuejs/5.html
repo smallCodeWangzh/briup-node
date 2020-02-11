@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index</title>
+</head>
+<body>
+	<div id="app">
+		<div>
+			<label>商品价格:</label><input type="number" v-model = "price">	
+		</div>
+		<div>
+			<label>商品数量:</label>
+			<button v-on:click = "number = --number <= 0 ? 0 : --number">-</button>
+			<span>{{ number }}</span>
+			<button v-on:click = "number++">+</button>
+		</div>
+		<div>
+			<label>总计：</label>
+			<span>￥ {{ number * price }}</span>
+		</div>
+	</div>
+	<script src="node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript">
+		const app = new Vue({
+			el : "#app",
+			data : {
+				number : 1,
+				price : 0.0
+			}
+		});
+	</script>
+</body>
+</html>

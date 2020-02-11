@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>index.html</title>
+</head>
+<body>
+	<div id="app">
+		<h1>{{ number }}</h1>
+		<button v-on:click="increate">增加</button>
+	</div>
+	<script type="text/javascript" src="node_modules/vue/dist/vue.js"></script>
+	<script type="text/javascript">
+		const app = new Vue({
+			el : "#app",
+			data : {
+				number : 1
+			},
+			methods : {
+				increate() {
+					this.number ++
+				}
+			}
+		});
+	</script>
+</body>
+</html>

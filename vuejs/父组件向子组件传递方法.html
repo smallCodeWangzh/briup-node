@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./node_modules/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <test @func="add"></test>
+    </div>
+    <template id="methodd">
+        <button @click="cl">试试父组件中的方法</button>
+    </template>
+    <script>
+        const vm = new Vue({
+            el: '#app',
+            methods: {
+                add(param) {
+                    alert("lisi:" + param);
+                }
+            },
+            components: {
+                "test" : {
+                    template : "#methodd",
+                    methods: {
+                        cl() {
+                            // 调用父组件中的方法
+                            this.$emit("func",55);
+                        }
+                    }
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
